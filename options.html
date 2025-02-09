@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Extension Options</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    input, button { margin-top: 10px; width: 100%; }
+  </style>
+</head>
+<body>
+  <h1>Manage Prompt Variants</h1>
+  <div>
+    <input type="text" id="title" placeholder="Menu Item Title" />
+    <input type="text" id="text" placeholder="Prompt Text" />
+    <button id="add">Add Menu Item</button>
+  </div>
+  <ul id="menuList"></ul>
+
+  <h2>Azure AI Configuration</h2>
+  <div>
+    <input type="text" id="apiKey" placeholder="API key" />
+    <input type="text" id="resourceName" placeholder="Resource name" />
+    <input type="text" id="deploymentId" placeholder="Deployment ID" />
+    <input type="text" id="apiVersion" placeholder="API version" value="2023-05-15"/>
+    <input type="number" id="maxTokens" placeholder="Max Tokens" value="120"/>
+    <input type="number" id="temperature" placeholder="Temperature" value="0.7"/>
+    <button id="saveApiConfig">Save API Configuration</button>
+  </div>
+
+  <script src="options.js"></script>
+</body>
+</html>

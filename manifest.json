@@ -1,0 +1,33 @@
+{
+  "manifest_version": 2,
+  "name": "LLM Browser Companion",
+  "version": "0.0.1",
+  "description": "Firefox extension to integrate your browser with LLMs.",
+  "permissions": [
+    "contextMenus",
+    "activeTab",
+    "storage",
+    "clipboardWrite",
+    "https://*.openai.azure.com/*"
+  ],
+  "background": {
+    "scripts": ["background.js"]
+  },
+  "content_scripts": [{
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+  }],
+  "options_ui": {
+    "page": "options.html",
+    "open_in_tab": true
+  },
+  "icons": {
+    "48": "icons/icon.png"
+  },
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "llm-browser-companion@mooo.com"
+    }
+  }
+}
