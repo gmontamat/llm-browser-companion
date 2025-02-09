@@ -2,26 +2,6 @@
 
 console.log("content-script: LOAD");
 
-function isNodeEditable(node) {
-  // Traverse up the DOM tree to check if any ancestor is editable
-  while (node) {
-    if (node.nodeType === Node.ELEMENT_NODE) {
-      const element = node;
-      const contentEditable = element.getAttribute('contenteditable');
-
-      if (element.isContentEditable || contentEditable === 'true') {
-        return true;
-      }
-
-      if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-        return true;
-      }
-    }
-    node = node.parentNode;
-  }
-  return false;
-}
-
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.text) {
     // Retrieve the user-configured Azure AI API credentials
@@ -62,20 +42,20 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         const responseText = data.choices[0].message.content;
 
         const selection = window.getSelection();
-        let isEditable = false;
-        // Check if there's a selection
-        if (selection.rangeCount > 0) {
-            const range = selection.getRangeAt(0);
-            const commonAncestorContainer = range.commonAncestorContainer;
-            // Check if the selected text is within an editable element
-            isEditable = isNodeEditable(commonAncestorContainer);
+        const text = selection.toString();
+        if (!text.trim()) {
+          // Copy to clipboard if not able to edit content
+          navigator.clipboard.writeText(responseText).then(() => {
+            alert("Replaced text copied to clipboard!");
+          });
         }
-
-        if (isEditable) {
-          // Replace the selected text with the response
+        else if (document.activeElement.isContentEditable) {
+          const range = selection.getRangeAt(0);
           range.deleteContents();
           range.insertNode(document.createTextNode(responseText));
-        } else {
+        }
+        else {
+          // Content is not editable
           // TODO: fix cross-origin error
           alert(responseText)
           // Open a new window with the response if not editable
