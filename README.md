@@ -7,8 +7,8 @@ the main points instead of reading through them, and I repeat the same copy-and-
 simplifies my process by directly calling the LLM provider with customizable prompts.
 
 Additionally, this happens to be an experiment to check if LLMs can help me write code in a language and framework I am
-not familiar with. It seems that coding for JavaScript/browser extensions comes with many restrictions. For instance,
-injecting this extension into an Outlook tab to modify an email or edit a Reddit comment is not allowed. Unfortunately,
+not familiar with. It seems that coding a browser extension in JavaScript comes with many restrictions. For instance,
+injecting this extension into an Outlook tab to modify an email or edit a Reddit comment is not simple. Unfortunately,
 the LLM wasn't very helpful in resolving these and other issues that arose during debugging.
 
 The extension logo was created by DALL-E.
